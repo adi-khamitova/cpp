@@ -7,9 +7,9 @@ int sum2(int a, int b) {
 
 
 void sum_all() {
-    int v = 1;
+    int v = 0;
     int s = 0;
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i <= 9; i++) {
         s = sum2(s, v);
         v++;
     }
