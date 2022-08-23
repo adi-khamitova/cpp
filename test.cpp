@@ -1,5 +1,5 @@
 #include <iostream>
-using std::cout;
+using namespace std;
 
 int sum2(int a, int b) {
     return a + b;
@@ -7,13 +7,11 @@ int sum2(int a, int b) {
 
 
 void sum_all() {
-    int v = 0;
     int s = 0;
-    for (int i = 0; i <= 9; i++) {
-        s = sum2(s, v);
-        v++;
+    for (int i = 0; i < 10; i++) {
+        s = sum2(s, i);
     }
-    cout << s << "\n";
+    cout << s << endl;
 } 
 
 
