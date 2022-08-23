@@ -6,15 +6,15 @@ int sum2(int a, int b) {
 }
 
 
-void sum_all() {
+int sum_all() {
     int s = 0;
     for (int i = 0; i < 10; i++) {
         s = sum2(s, i);
     }
-    cout << s << endl;
+    return s;
 } 
 
 
 int main() {
-    sum_all();
+    cout << sum_all() << endl;
 }
