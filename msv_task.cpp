@@ -4,20 +4,19 @@
 
 using namespace std;
 
-int reverse (int *a, int b) {
+void reverse (int *data, int size) {
 
-    for (int i = 0; i < (b / 2); i++) {
-        int c = a[i];
-        a[i] = a[b - 1 - i];
-        a[b - 1 - i] = c;
+    for (int i = 0; i < (size / 2); i++) {
+        int c = data[i];
+        data[i] = data[size - 1 - i];
+        data[size - 1 - i] = c;
     }
 
-    return *a;
 }
 
-int main() {
+int main(int argc, char** argv) {
     srand(time(NULL));
-    
+
     int size = 10 + rand()%11;
     int *arr = new int[size];
 
@@ -31,9 +30,9 @@ int main() {
     for (int i = 0; i < size; i++) {
         cout << arr[i] << " ";
     }
-
     cout << endl;
-    *arr = reverse(arr, size);
+
+    reverse(arr, size);
 
     cout << "Массив после:" << endl;
     for (int i = 0; i < size; i++) {
@@ -41,6 +40,6 @@ int main() {
     }
     cout << endl;
 
-    delete arr;
+    delete [] arr;
     return 0;
 }
