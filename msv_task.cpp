@@ -38,6 +38,6 @@ int main(int argc, char** argv) {
     }
     cout << endl;
 
-    delete [] arr;
+    delete[] arr;
     return 0;
 }
