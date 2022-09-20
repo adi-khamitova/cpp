@@ -20,8 +20,6 @@ int main(int argc, char** argv) {
     int size = 10 + rand()%11;
     int *arr = new int[size];
 
-    srand(time(NULL));
-
     for (int i = 0; i < size; i++) {
         arr[i] = rand();
     } 
