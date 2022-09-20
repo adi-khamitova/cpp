@@ -16,7 +16,8 @@ int reverse (int *a, int b) {
 }
 
 int main() {
-
+    srand(time(NULL));
+    
     int size = 10 + rand()%11;
     int *arr = new int[size];
 
