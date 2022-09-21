@@ -7,7 +7,7 @@ struct Item {
     Item* next;
 };
 
-int print(Item* head) {
+void print(Item* head) {
     Item* curr;
     curr = head;
     while (curr != nullptr) {
@@ -15,17 +15,13 @@ int print(Item* head) {
         curr = curr -> next;
     }
     cout << endl;
-    return 0;
 }
 
-int main(int argc, char** argv) {
+Item *create(int size) {
     Item *head = nullptr;
     Item *prev = nullptr;
 
-    srand(time(NULL));
-    int count = 1 + rand()%21;
-
-    for (int i = 0; i < count; i++) {
+    for (int i = 0; i < size; i++) {
 
         Item *crnt = new Item();
         crnt -> data = i;
@@ -40,8 +36,27 @@ int main(int argc, char** argv) {
         }
 
         prev = crnt;
-
     }
-    print(head);
+    return head;
+    
+
+}
+
+void free(Item* list) {
+    Item* prev = list;
+
+    while (list != nullptr) {
+        list = list -> next;
+        delete(prev);
+        prev = list;
+    }
+}
+
+int main(int argc, char** argv) {
+
+    srand(time(NULL));
+    Item* list = create(1 + rand()%21);
+    print(list);
+    free(list);
 
 }
