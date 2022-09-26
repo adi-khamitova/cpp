@@ -62,7 +62,7 @@ Item* insert_el(Item* list, int new_data, int pos) {
 
 
 
-    if (pos == 0) {
+    if (pos == 1) {
         new_el -> next = list;
         return new_el;
 
@@ -115,7 +115,7 @@ int main(int argc, char** argv) {
 
     int pos = 1 + rand()%21;
     if (pos > count + 1) {
-        pos = count;
+        pos = count + 1;
     }
     list = insert_el(list, rand(), pos);
     print(list);
