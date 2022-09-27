@@ -62,13 +62,14 @@ Item* insert_el(Item* list, int new_data, int pos) {
 
 
 
-    if (pos == 1) {
+    if (pos <= 1) {
         new_el -> next = list;
         return new_el;
 
     }
 
     for (int i = 0; i < pos - 2; i ++) {
+        if (crnt -> next == nullptr) break;
         crnt = crnt -> next;
     }
     
@@ -76,7 +77,6 @@ Item* insert_el(Item* list, int new_data, int pos) {
     crnt -> next = new_el;
     return list;
  
-    
 }
 
 Item* delete_el(Item* list, int pos) {
@@ -85,7 +85,7 @@ Item* delete_el(Item* list, int pos) {
     Item* prev;
     int count = 0;
 
-    if (pos == 1) {
+    if (pos <= 1) {
         crnt = list -> next;
         delete(list);
         return crnt;
@@ -94,14 +94,13 @@ Item* delete_el(Item* list, int pos) {
     for (int i = 0; i < pos - 1; i++) {
         prev = crnt;
         crnt = crnt -> next;
+        if (crnt -> next == nullptr) break;
     }
 
     prev -> next = crnt -> next;
     delete (crnt);
     return list;
        
-
-
 }
 
 
@@ -113,20 +112,10 @@ int main(int argc, char** argv) {
     Item* list = create(count);
     print(list);
 
-    int pos = 1 + rand()%21;
-    if (pos > count + 1) {
-        pos = count + 1;
-    }
-    list = insert_el(list, rand(), pos);
+    list = insert_el(list, rand(), rand()%21);
     print(list);
 
-    pos = 1 + rand()%22;
-    
-    if (pos > count + 1) {
-        pos = count + 1;
-    }
-    
-    list = delete_el(list, pos);
+    list = delete_el(list, rand()%22);
     print(list);
 
     free(list);
