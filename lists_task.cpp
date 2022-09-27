@@ -107,9 +107,8 @@ Item* delete_el(Item* list, int pos) {
 int main(int argc, char** argv) {
 
     srand(time(NULL));
-    int count = 1 + rand()%21;
 
-    Item* list = create(count);
+    Item* list = create(1 + rand()%21);
     print(list);
 
     list = insert_el(list, rand(), rand()%21);
