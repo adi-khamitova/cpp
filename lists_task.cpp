@@ -47,7 +47,7 @@ void free(Item* list) {
 
     while (list != nullptr) {
         list = list -> next;
-        delete(prev);
+        delete prev;
         prev = list;
     }
 }
@@ -62,13 +62,13 @@ Item* insert_el(Item* list, int new_data, int pos) {
 
 
 
-    if (pos <= 1) {
+    if (pos ==0) {
         new_el -> next = list;
         return new_el;
 
     }
 
-    for (int i = 0; i < pos - 2; i ++) {
+    for (int i = 0; i < pos - 1; i ++) {
         if (crnt -> next == nullptr) break;
         crnt = crnt -> next;
     }
@@ -98,23 +98,61 @@ Item* delete_el(Item* list, int pos) {
     }
 
     prev -> next = crnt -> next;
-    delete (crnt);
+    delete crnt;
     return list;
        
 }
+
+Item* reverse(Item* list) {
+    Item* crnt;
+    Item* prev = nullptr;
+
+    while (list -> next != nullptr) {
+        crnt = list -> next;
+        list -> next = prev;
+        prev = list;
+        list = crnt;
+    }
+    crnt = list -> next;
+    list -> next = prev;
+    return list;
+}
+
+
+
 
 
 int main(int argc, char** argv) {
 
     srand(time(NULL));
 
-    Item* list = create(1 + rand()%21);
+    int size = 1 + rand()%21;
+
+    Item* list = create(size);
+    print(list);
+
+    list = insert_el(list, rand(), size);
+    print(list);
+
+    list = delete_el(list, rand()%22);
+    print(list);
+
+    list = reverse(list);
+    print(list);
+    
+    list = insert_el(list, rand(), 0);
+    print(list);
+
+    list = delete_el(list, 0);
     print(list);
 
     list = insert_el(list, rand(), rand()%21);
     print(list);
 
     list = delete_el(list, rand()%22);
+    print(list);
+
+    list = reverse(list);
     print(list);
 
     free(list);
