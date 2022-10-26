@@ -11,7 +11,7 @@ class listStorage {
         listStorage();
         ~listStorage();
         void print();
-        void insert(int data, int pos);
+        void insert(int pos, int data);
         void remove(int pos);
         void reverse();
     
