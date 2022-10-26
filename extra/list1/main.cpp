@@ -3,9 +3,13 @@
 
 int main(int argc, char** argv) {
     listStorage myst;
-    myst.print();
 
     myst.insert(0, 15);
+    myst.insert(1, 8);
+    myst.insert(2, 43);
+    myst.insert(3, 17);
+    myst.insert(3, 17);
+    myst.insert(6, -8);
     myst.print();
 
     myst.reverse();
