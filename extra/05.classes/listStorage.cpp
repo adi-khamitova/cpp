@@ -86,3 +86,28 @@ void listStorage::reverse() {
     crnt = head -> next;
     head -> next = prev; 
 }
+
+int listStorage::size() {
+    int count = 1;
+    Item* crnt = head;
+    while (crnt -> next != nullptr) {
+        count += 1;
+        crnt = crnt -> next;
+    }
+    return count;
+}
+
+
+bool listStorage::get(int pos, int &data) {
+    if (pos >= listStorage::size()) {
+        std::cout << "requested position is bigger than the size" << std::endl;
+        return false;
+    }
+    Item* crnt = head;
+    for (int i = 0; i < pos; i++) {
+        crnt = crnt -> next;
+    }
+    data = crnt -> data;
+    std::cout << data << std::endl;
+    return true;
+}
