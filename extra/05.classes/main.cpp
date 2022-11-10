@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
     myst.print();
 
     int data;
-    //myst.get(3, data);
+    myst.get(3, data);
     myst.get(10, data);
 
 
