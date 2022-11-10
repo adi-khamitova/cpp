@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
     myst.print();
 
     int data;
-    myst.get(3, data);
+    //myst.get(3, data);
     myst.get(10, data);
 
 
@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
     myst.reverse();
     myst.print();
 
-    myst.remove(0);
+    myst.remove(1);
     myst.print();
 
     myst.remove(-8);

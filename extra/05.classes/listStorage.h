@@ -6,6 +6,7 @@ class listStorage {
             Item* next;
         };
         Item* head;
+        int* length;
 
     public: 
         listStorage();
@@ -15,7 +16,6 @@ class listStorage {
         bool get(int pos, int &data);
         void remove(int pos);
         void reverse();
-        int size();
+        void size();
     
-
 };

@@ -48,6 +48,7 @@ void listStorage::insert(int pos, int data) {
     
     new_el -> next = crnt -> next;
     crnt -> next = new_el;
+    listStorage::size();
 }
 
 void listStorage::remove(int pos) {
@@ -71,6 +72,7 @@ void listStorage::remove(int pos) {
 
     prev -> next = crnt -> next;
     delete crnt;
+    listStorage::size();
 }
 
 void listStorage::reverse() {
@@ -87,27 +89,24 @@ void listStorage::reverse() {
     head -> next = prev; 
 }
 
-int listStorage::size() {
-    int count = 1;
+void listStorage::size() {
+    int count;
+    count = 1;
     Item* crnt = head;
     while (crnt -> next != nullptr) {
         count += 1;
         crnt = crnt -> next;
     }
-    return count;
+    *length = count;
 }
 
-
 bool listStorage::get(int pos, int &data) {
-    if (pos >= listStorage::size()) {
-        std::cout << "requested position is bigger than the size" << std::endl;
+    if (pos >= *length) 
         return false;
-    }
     Item* crnt = head;
     for (int i = 0; i < pos; i++) {
         crnt = crnt -> next;
     }
     data = crnt -> data;
-    std::cout << data << std::endl;
     return true;
 }
