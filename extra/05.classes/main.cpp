@@ -19,6 +19,19 @@ int main(int argc, char** argv) {
     myst.reverse();
     myst.print();
 
+    while (myst.size() > 0) {
+        myst.remove(0);
+    }
+    myst.print();
+
+    myst.insert(0, 34);
+    myst.insert(1, -8);
+    myst.insert(2, 5);
+    myst.insert(3, 3);
+    myst.insert(3, 0);
+    myst.insert(6, 1);
+    myst.print();
+
     myst.remove(5);
     myst.print();
 
