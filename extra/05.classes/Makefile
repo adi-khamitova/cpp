@@ -1,9 +1,4 @@
-obj = main.o listStorage.o
-
-all: $(obj)
-
-$(obj): %.o: %.cpp 
-	$(CXX) -c -o $@ $^
-
+all: *.cpp
+	$(CXX) -c $^
 clean:
-	rm $(obj)
+	rm *.o
