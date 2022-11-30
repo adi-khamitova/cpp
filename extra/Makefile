@@ -1,10 +1,9 @@
 vpath % $(project)
-name = $(project)
 
 obj := $(patsubst %.cpp,%.o,$(wildcard $(project)/*.cpp))
 
 all: $(obj)
-	$(CXX) $^ 
+	$(CXX) $^ -o $(project)/'$(project)'
 
 clean:
 	rm $(project)/*.o
