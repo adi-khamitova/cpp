@@ -1,4 +1,3 @@
-
 class listStorage {
     private:
         struct Item {
