@@ -1,16 +1,16 @@
-project = false
-ifeq ($(project), false)
-SUBDIRS := $(patsubst %/., %, $(wildcard */.))
+subdirs := $(patsubst %/., %, $(wildcard */.))
 
-all:
-	for dir in $(SUBDIRS) ; do \
-		make project=$$dir ; \
-	done
-else
+all: $(subdirs)
+
+$(subdirs):
+	echo $@
+	$(MAKE) build project=$@
+
+.PHONY: all $(subdirs)
 
 obj := $(patsubst %.cpp,%.o,$(wildcard $(project)/*.cpp))
 
-all: compile link
+build: compile link
 
 compile: $(obj)
 
@@ -20,7 +20,9 @@ compile: $(obj)
 link:
 	$(CXX) $(obj) -o '$(project)/$(project)'
 
-endif
-
 clean:
 	rm */*.o
+# 1. define 
+# 2. if else
+# 3. bash
+# 4. subdirs
