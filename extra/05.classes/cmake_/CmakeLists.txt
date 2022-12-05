@@ -1,0 +1,3 @@
+cmake_minimum_required(VERSION 3.22.1)
+project(my_project)
+add_executable(proj /workspaces/cpp/extra/05.classes/main.cpp /workspaces/cpp/extra/05.classes/listStorage.cpp)
