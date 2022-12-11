@@ -24,64 +24,53 @@ string min_MAX(string line) {
 }
 
 
-
-
-string kuku(string line)
-{
+string kuku(string line, string replace) {
+    int count = 0;
     for (int i = 0; i < line.size(); i++) {
-        if (i + 4 < line.size() && line[i] != 'k' && line[i + 1] != 'u' && line[i + 2] != '-' && line[i + 3] != 'k' && line[i + 4] != 'u' && line[i + 5] == ' ' && i == 0) {
-            line[i] = 'k', line[i + 1] = 'u', line[i + 2] = '-', line[i + 3] = 'k', line[i + 4] = 'u';
-            i += 4;
+        if (isalpha(line[i+1]) || isdigit(line[i+1]))
+            count += 1;
+        if (line[i] == ' ') {
+            if (count == 5) {
+                line.erase(i-5, 5);
+                line.insert(i-5, replace);
+            }
+            count = 0;
         }
-
-        if (i + 4 < line.size() && line[i] == ' ' && line[i + 1] != 'k' && line[i + 2] != 'u' && line[i + 3] != '-' && line[i + 4] != 'k' && line[i + 5] != 'u' && line[i + 6] == ' ') {
-            line[i+1] = 'k', line[i + 2] = 'u', line[i + 3] = '-', line[i + 4] = 'k', line[i + 5] = 'u';
-            i += 4;
-        }
-
-        if (i + 4 < line.size() && line[i] != 'k' && line[i + 1] != 'u' && line[i + 2] != '-' && line[i + 3] != 'k' && line[i + 4] != 'u' && line[i - 1] == ' ' && i == line.size() - 5) {
-            line[i] = 'k', line[i + 1] = 'u', line[i + 2] = '-', line[i + 3] = 'k', line[i + 4] = 'u';
-            i += 4;
+        if (i == line.size() - 1 && count == 5) {
+            line.erase(i-5, 5);
+            line.insert(i-5, replace);
         }
     }
     return line;
 }
 
 
-string kukareku(string line) {
-    int d = line.size();
-    int c = 0;
-    for (int i = 0; i < d; i++) {
-        if (line[i] == 'k' && line[i + 1] == 'u' && line[i + 2] == '-' \
-        && line[i + 3] == 'k' && line[i + 4] == 'u') {
-            line.insert(i+2, string("-ka-re"));
-            c++;
-        }
+string kukareku(string line, string first, string change) {
+    int count = 0;
+    while (line.find(first) != string::npos) {
+        int head;
+        head = line.find(first);
+        line.erase(head, 5);
+        line.insert(head, change);
+        count += 1;
     }
-    if (c == 0) {
-        line.insert(d/2, string("ku-ka-re-ku"));
+    if (count == 0) {
+        line.insert(line.size() / 2, change);
     }
     return line;
 }
 
 
-string remove_kuku(string line) {
-    while ((line.find("ku-ku")) != string :: npos) {
-        int i = line.find("ku-ku");
+string remove_kuku(string line, string first) {
+    while ((line.find(first)) != string :: npos) {
+        int i = line.find(first);
         line.erase(i, 5);
     }
     return line;
 }
 
-string remove_toend(string line) {
-    int pos = 0;
-    for (int i = 0; i < line.size(); i++) {
-        if (i + 4 < line.size() && line[i] == 'k' && line[i + 1] == 'u' \
-        && line[i + 2] == '-' && line[i + 3] == 'k' && line[i + 4] == 'u') {
-            if (i > pos)
-                pos = i;
-        }
-    }
+string remove_toend(string line, string first) {
+    int pos = line.rfind(first);
     line.erase(pos+5, line.size());
     return line;
 }
@@ -142,13 +131,20 @@ int count_words(string line) {
 int main(int argc, char** argv) {
     string line;
     getline(cin, line);
+    string first, change;
+    cout << "enter a word to be replaced: ";
+    cin >> first;
+    cout << "enter a word to replace to: ";
+    cin >> change;
+
     cout << min_MAX(line) << endl;
-    cout << kuku(line) << endl;
-    cout << kukareku(line) << endl;
-    cout << remove_kuku(line) << endl;
-    cout << remove_toend(line) << endl;
+    cout << kuku(line, first) << endl;
+    cout << kukareku(line, first, change) << endl;
+    cout << remove_kuku(line, first) << endl;
+    cout << remove_toend(line, first) << endl;
     cout << balance(line) << endl;
     cout << remove(line) << endl;
     cout << count_words(line) << endl;
+
     return 0;
 }
