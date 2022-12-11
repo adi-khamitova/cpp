@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.22.1)
+project(my_project)
+add_executable(05.classes /workspaces/cpp/extra/05.classes/main.cpp 
+                       /workspaces/cpp/extra/05.classes/listStorage.cpp)
+add_executable(04.list /workspaces/cpp/extra/04.list/lists_task.cpp)
+add_executable(03.array /workspaces/cpp/extra/03.array/array.cpp)
+add_executable(02.copy /workspaces/cpp/extra/02.copy/copy_task.cpp)
+add_executable(01.hello /workspaces/cpp/extra/01.hello/helloworld.cpp)
