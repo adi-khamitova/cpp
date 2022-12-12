@@ -1,11 +1,11 @@
 #include <iostream>
-#include <cmath>
+
 using namespace std;
 
 void squared(int n) {
     if (n > 1)
         squared(n-1);
-    cout << n << " - " << pow(n, 2) << endl;
+    cout << "n = " << n << ", n^2 = " << n*n << endl;
 }
 
 int main(int argc, char** argv) {
