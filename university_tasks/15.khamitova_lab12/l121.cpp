@@ -11,6 +11,10 @@ void squared(int n) {
 int main(int argc, char** argv) {
     int n;
     cin >> n;
+    if (n > 1024) {
+        cout << "too big number" << endl;
+        return 0;
+    }
     squared(n);
     return 0;
 }
