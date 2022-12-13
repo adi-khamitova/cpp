@@ -2,22 +2,22 @@
 
 using namespace std;
 
-int num_count(int n) {
+int digits_count(int n) {
     if (n / 10 == 0)
         return 1;
-    return 1 + num_count(n / 10);
+    return 1 + digits_count(n / 10);
 }
 
-int num_sum(int n) {
+int digits_sum(int n) {
     if (n / 10 == 0)
         return n;
-    return (n % 10) + num_sum(n / 10);
+    return (n % 10) + digits_sum(n / 10);
 }
 
 
-void binary_num(int n) {
+void digits_bin(int n) {
     if (n / 2 != 0) 
-        binary_num(n / 2);
+        digits_bin(n / 2);
     cout << n % 2;
     return;
 }
@@ -25,10 +25,12 @@ void binary_num(int n) {
 
 int main(int argc, char** argv) {
     int n;
+    cout << "enter a decimal number: ";
     cin >> n;
-    cout << num_count(n) << endl;
-    cout << num_sum(n) << endl;
-    binary_num(n);
+    cout << "number of digits: " << digits_count(n) << endl;
+    cout << "sum of digits: " << digits_sum(n) << endl;
+    cout << "binary value: ";
+    digits_bin(n);
     cout << endl;
     return 0;
 }

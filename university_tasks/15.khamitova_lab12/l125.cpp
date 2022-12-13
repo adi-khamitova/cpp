@@ -17,7 +17,7 @@ double radical2(int n, int count = 2) {
 
 int main(int argc, char** argv) {
     int n;
-    cout << "enter n: ";
+    cout << "enter number of radicals: ";
     cin >> n;
     cout << "a) " << radical(n) << endl;
     cout << "b) " << radical2(n) << endl;
