@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -15,11 +16,10 @@ int digits_sum(int n) {
 }
 
 
-void digits_bin(int n) {
-    if (n / 2 != 0) 
-        digits_bin(n / 2);
-    cout << n % 2;
-    return;
+string digits_bin(int n) {
+    if (n / 2 == 0) 
+        return to_string(n);
+    return digits_bin(n/2).append(to_string(n % 2));
 }
 
 
@@ -29,8 +29,6 @@ int main(int argc, char** argv) {
     cin >> n;
     cout << "number of digits: " << digits_count(n) << endl;
     cout << "sum of digits: " << digits_sum(n) << endl;
-    cout << "binary value: ";
-    digits_bin(n);
-    cout << endl;
+    cout << "binary value: " << digits_bin(n) << endl;
     return 0;
 }
