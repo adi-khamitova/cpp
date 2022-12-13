@@ -16,19 +16,20 @@ int digits_sum(int n) {
 }
 
 
-string digits_bin(int n) {
-    if (n / 2 == 0) 
-        return to_string(n);
-    return digits_bin(n/2).append(to_string(n % 2));
+string& digits_bin(string &str, int n) {
+    if (n == 0)
+        return str;
+    return digits_bin(str, n >> 1).append( n & 0x01 ? "1" : "0");
 }
 
 
 int main(int argc, char** argv) {
+    string str = "0b";
     int n;
     cout << "enter a decimal number: ";
     cin >> n;
     cout << "number of digits: " << digits_count(n) << endl;
     cout << "sum of digits: " << digits_sum(n) << endl;
-    cout << "binary value: " << digits_bin(n) << endl;
+    cout << "binary value: " << digits_bin(str, n) << endl;
     return 0;
 }
