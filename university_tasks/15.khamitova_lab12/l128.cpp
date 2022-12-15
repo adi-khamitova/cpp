@@ -1,87 +1,133 @@
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
-bool positive_els(double array[], int size, int n = 0) {
-    if (n == size)
+bool positive_els_check(int array[], int size) {
+    if (size == 0)
         return false;
-    if (array[n] > 0)
+    if (array[size-1] > 0)
         return true;
-    return positive_els(array, size, n+1);
+    return positive_els_check(array, size-1);
 }
 
-bool no_negative_els(double array[], int size, int n = 0) {
-    if (n == size)
+bool no_negative_els_check(int array[], int size) {
+    if (size == 0)
         return true;
-    if (array[n] < 0)
-        return true;
-    return no_negative_els(array, size, n+1);
-}
-
-bool bigger_el(double array[], double a, int size, int n = 0) {
-    if (n == size)
+    if (array[size-1] < 0)
         return false;
-    if (array[n] > a)
-        return true;
-    return bigger_el(array, a, size, n+1);
+    return no_negative_els_check(array, size-1);
 }
 
-double max_el(double array[], int size, double max, int n = 1) {
-    if (n == size)
+bool bigger_smaller_el_check(int array[], int a, int size, char sign = '>') {
+    if (size == 0)
+        return false;
+    if (sign == '>') {
+        if (array[size-1] > a)
+            return true;
+        return bigger_smaller_el_check(array, a, size-1, '>');
+    }
+    else {
+        if (array[size-1] < a)
+            return true;
+        return bigger_smaller_el_check(array, a, size-1, '<');
+    }
+
+}
+
+int max_el(int array[], int size, int max) {
+    if (size == 0)
         return max;
-    if (array[n] > max)
-        max = array[n];
-    return max_el(array, size, max, n+1);
+    if (array[size-1] > max)
+        max = array[size-1];
+    return max_el(array, size-1, max);
 }
 
-int positive_count(double array[], int size, int n = 0) {
-    if (n == size)
+int positive_count(int array[], int size) {
+    if (size == 0)
         return 0;
-    if (array[n] > 0)
-        return 1 + positive_count(array, size, n+1);
+    if (array[size-1] > 0)
+        return 1 + positive_count(array, size-1);
     else
-        return positive_count(array, size, n+1);
+        return positive_count(array, size-1);
 }
 
-void sorting(double *array, int size, int n = 0) {
-    if (n == size)
+void sorting(int *array, int size) {
+    if (size == 0)
         return;
-    double min = array[n];
-    int min_i = n;
-    for (int i = n+1; i < size; i++) {
-        if (array[i] < min) {
-            min = array[i];
-            min_i = i;
+    int max = array[size-1];
+    int max_i = size-1;
+    for (int i = 0; i < size-1; i++) {
+        if (array[i] > max) {
+            max = array[i];
+            max_i = i;
         }
     }
-    array[min_i] = array[n];
-    array[n] = min;
-    sorting(array, size, n+1);
+    array[max_i] = array[size-1];
+    array[size-1] = max;
+    sorting(array, size-1);
 }
+
+int max_el2(int array[], int size, int max) {
+    if (size == 0)
+        return max;
+    if (array[size-1] > max)
+        return max_el(array, size-1, array[size-1]);
+    else
+        return max_el(array, size-1, max);
+}
+
+int negative_sum(int array[], int size) {
+    if (size == 0)
+        return 0;
+    if (array[size-1] >= 0)
+        return negative_sum(array, size-1);
+    else
+        return array[size-1] + negative_sum(array, size-1);
+}
+
+/*
+bool mul_less_w(int array[], int w, int size, int *mul, int n = 0) {
+    if (n == 0) {
+        if (w < 0)
+            return false;
+        if (bigger_smaller_el_check(array, -sqrt(w), size) && bigger_smaller_el_check(array, sqrt(w), size, '<') == 0)
+            return false;
+    }
+    if (n == size)
+        return true;
+    if (array[n] * array[n] < w)
+        *mul *= array[n];
+        mul_less_w(array, w, size, mul, n+1);
+    return true;
+}
+
+*/
+
 
 int main(int argc, char** argv) {
     int size;
     cout << "enter the number of elements: ";
     cin >> size;
-    double *array = new double[size];
+    int *array = new int[size];
     cout << "enter the els of array: ";
     for (int i = 0; i < size; i++) {
         cin >> array[i];
     }
 
-    double a;
+    int a;
     cout << "enter some number a: ";
     cin >> a;
 
-    if (positive_els(array, size))
+    if (positive_els_check(array, size))
         cout << "there is an element > 0" << endl;
     else
         cout << "no els > 0" << endl;
-    if (no_negative_els(array, size))
+    if (no_negative_els_check(array, size))
         cout << "no els < 0" << endl;
     else
         cout << "there is an element < 0" << endl;
-    if (bigger_el(array, a, size)) 
+    if (bigger_smaller_el_check(array, a, size)) 
         cout << "there is an element > a" << endl;
     else
         cout << "no els > a" << endl;
@@ -96,6 +142,19 @@ int main(int argc, char** argv) {
         cout << array[i] << " ";
     }
     cout << endl;
+
+    cout << "max el of array: " << max_el2(array, size, array[0]) << endl;
+    cout << "sum of els < 0: " << negative_sum(array, size) << endl;
+
+    int w;
+    cout << "enter some number w: ";
+    cin >> w;
+    int *mul;
+    *mul = 1;
+    // if (mul_less_w(array, w, size, mul))
+    //     cout << "multiply of numbers in square < w: " << *mul << endl;
+    // else
+    //     cout << "no numbers in square < w" << endl;
 
     delete[] array;
     return 0;
