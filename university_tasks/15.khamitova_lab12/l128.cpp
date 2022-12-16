@@ -86,23 +86,25 @@ int negative_sum(int array[], int size) {
         return array[size-1] + negative_sum(array, size-1);
 }
 
-/*
-bool mul_less_w(int array[], int w, int size, int *mul, int n = 0) {
-    if (n == 0) {
-        if (w < 0)
+
+bool mul_less_w(int *array, int w, int size, int &mul, int count = 0) {
+    if (w < 0)
+        return false;
+    if (size == 0) {
+        if (count == 0)
             return false;
-        if (bigger_smaller_el_check(array, -sqrt(w), size) && bigger_smaller_el_check(array, sqrt(w), size, '<') == 0)
-            return false;
+        else
+            return true;
     }
-    if (n == size)
-        return true;
-    if (array[n] * array[n] < w)
-        *mul *= array[n];
-        mul_less_w(array, w, size, mul, n+1);
+    if ((array[size-1] * array[size-1]) < w) {
+        mul = mul * (array[size-1]);
+        count++;
+    }
+    mul_less_w(array, w, size-1, mul, count);
     return true;
 }
 
-*/
+
 
 
 int main(int argc, char** argv) {
@@ -149,12 +151,11 @@ int main(int argc, char** argv) {
     int w;
     cout << "enter some number w: ";
     cin >> w;
-    int *mul;
-    *mul = 1;
-    // if (mul_less_w(array, w, size, mul))
-    //     cout << "multiply of numbers in square < w: " << *mul << endl;
-    // else
-    //     cout << "no numbers in square < w" << endl;
+    int mul = 1;
+    if (mul_less_w(array, w, size, mul))
+        cout << "multiply of numbers in square < w: " << mul << endl;
+    else
+        cout << "no numbers in square < w" << endl;
 
     delete[] array;
     return 0;
