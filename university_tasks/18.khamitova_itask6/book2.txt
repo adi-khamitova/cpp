@@ -1,0 +1,4 @@
+L.N.Tolstoy Peaceandwar msk 1867 6
+I.S.Turgenev Mumu house1 1854 3
+I.S.Turgenev Fathersandchildren house2 1862 10
+Y.Zamyatin We house3 1924 4
