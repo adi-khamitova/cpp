@@ -1,16 +1,16 @@
-L. N. Tolstoy
+Lev Nikolayevich Tolstoy
 War and peace
 msk
 1867 6
-I. S. Turgenev
+Ivan Sergeevich Turgenev
 Mumu
 house1
 1854 3
-I. S. Turgenev
+Ivan Sergeevich Turgenev
 Fathers and children
 house2
 1862 10
-Y. Zamyatin
+Yevgeniy Zamyatin
 We
 house3
 1924 4
