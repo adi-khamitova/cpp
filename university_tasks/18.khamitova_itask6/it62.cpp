@@ -8,33 +8,46 @@
 #include <string>
 #include <fstream>
 #include <cstdlib>
-#include <map>
+#include <sstream>
 #include <vector>
 
-using namespace std;
-
 struct Book {
-    char author[100];
-    char title[100];
-    char pub_house[100];
+    std::string author;
+    std::string title;
+    std::string pub_house;
     int pub_year;
     int book_count;
 };
 
-void read_file(vector <Book>& lib)
-{
-    Book book;;
-    ifstream fin("book2.txt");
-    while(!fin.eof()) {
-        fin.read((char*)&book, sizeof(lib));
-        lib.push_back(book);  
+
+void read_file(std::vector<Book> &lib) {
+    std::ifstream fin("book2.txt");
+    std::string line;
+    bool last_valid = true;
+
+    while (!fin.eof()) {
+        Book &book = lib.emplace_back();
+        last_valid = false;
+        if (!std::getline(fin, book.author))
+            break;
+        if (!std::getline(fin, book.title))
+            break;
+        if (!std::getline(fin, book.pub_house))
+            break;
+        if (!std::getline(fin, line))
+            break;
+        std::istringstream iss(line);
+        if (!(iss >> book.pub_year >> book.book_count))
+            break;
+        last_valid = true;
     }
-    fin.close();
+    if (!last_valid)
+        lib.pop_back();
 }
 
-int author_count(vector <Book> lib, int n, string name) {
+int author_count(std::vector <Book> lib, std::string name) {
     int count = 0;
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < lib.size(); i++) {
         if (lib[i].author == name)
             count += lib[i].book_count;
     }
@@ -43,25 +56,19 @@ int author_count(vector <Book> lib, int n, string name) {
 
 
 int main(int argc, char** argv) {
-    int n;
-    cout << "enter the number of books: ";
-    cin >> n;
-    vector <Book> lib(n);
+    std::vector <Book> lib;
     read_file(lib);
 
+    std::string name;
+    std::cout << "enter the author: ";
+    std::getline(std::cin, name);
 
-    char name[100];
-    cout << "enter the author: ";
-    cin >> name;
-
-    for (auto const& b: lib) cout << b.author << endl;
-
-
-    int count = author_count(lib, n, name);
+    int count = author_count(lib,name);
     if (count == 0)
-        cout << "no books of this author in the lib" << endl;
+        std::cout << "no books of this author in the lib" << std::endl;
     else
-        cout << count << " books of this author in the lib" << endl;
+        std::cout << count << " books of this author in the lib" << std::endl;
 
     return 0;
 }
+
